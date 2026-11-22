@@ -55,7 +55,7 @@ def split_audio(path: Path, duration: float, chunk_seconds: float, overlap: floa
         done = subprocess.run(
             ["ffmpeg", "-y", "-v", "error", "-ss", f"{offset:.3f}", "-t", f"{length:.3f}",
              "-i", str(path), "-vn", "-c:a", "copy", str(target)],
-            capture_output=True, text=True, check=False, check=False,
+            capture_output=True, text=True, check=False,
         )
         if done.returncode != 0 or not target.is_file() or target.stat().st_size == 0:
             raise RuntimeError(f"ffmpeg could not create chunk {index}: {done.stderr.strip()[:300]}")
